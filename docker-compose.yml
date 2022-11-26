@@ -1,0 +1,47 @@
+version: "2.4"
+services:
+#  hr-platform:
+#    image: hr-platform-2022
+#    build:
+#      context: ./
+#      dockerfile: docker/Dockerfile
+#    container_name: hr-platform
+#    restart: always
+#    env_file: .env
+#    ports:
+#      - 8099:8099
+#    networks:
+#      - hr-network
+
+#  redis:
+#    image: redis:alpine
+#    container_name: redis_db
+#    command: redis-server --appendonly yes
+#    ports:
+#      - 6379:6379
+#    volumes:
+#      - ./data:/data
+#    restart: always
+#    networks:
+#      - hr-network
+
+  postgres:
+    container_name: ${APP_NAME}-postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5434:5432"
+    restart: unless-stopped
+    networks:
+      - hr-network
+
+volumes:
+  postgres:
+
+networks:
+  hr-network:
