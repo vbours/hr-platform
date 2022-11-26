@@ -1,11 +1,9 @@
 package com.boursinos.hrplatform.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,57 +11,150 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Getter
-@Setter
-@ToString
 @Entity
+@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 @Table(name = "Employee")
 public class Employee {
 
     @Id
     @JsonProperty("_id")
+    @JsonIgnore
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "employee_id")
     private String id;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "firstname")
     private String firstname;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "lastname")
     private String lastname;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "gender")
     private Gender gender;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
-    @Column(name = "Address")
-    private String Address;
+    @Column(name = "address")
+    private String address;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "postCode")
     private String postCode;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "telNumber")
     private String telNumber;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "contractType")
     private ContractType contractType;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "totalHolidays")
     private int totalHolidays;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "salary")
     private int salary;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
     @Column(name = "contractStart")
     private Date contractStart;
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        address = address;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getTelNumber() {
+        return telNumber;
+    }
+
+    public void setTelNumber(String telNumber) {
+        this.telNumber = telNumber;
+    }
+
+    public ContractType getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(ContractType contractType) {
+        this.contractType = contractType;
+    }
+
+    public int getTotalHolidays() {
+        return totalHolidays;
+    }
+
+    public void setTotalHolidays(int totalHolidays) {
+        this.totalHolidays = totalHolidays;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public Date getContractStart() {
+        return contractStart;
+    }
+
+    public void setContractStart(Date contractStart) {
+        this.contractStart = contractStart;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id='" + id + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", gender=" + gender +
+                ", Address='" + address + '\'' +
+                ", postCode='" + postCode + '\'' +
+                ", telNumber='" + telNumber + '\'' +
+                ", contractType=" + contractType +
+                ", totalHolidays=" + totalHolidays +
+                ", salary=" + salary +
+                ", contractStart=" + contractStart +
+                '}';
+    }
 }
