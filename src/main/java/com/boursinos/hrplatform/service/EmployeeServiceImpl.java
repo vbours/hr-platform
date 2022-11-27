@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee updateEmployee(String id, Employee employee){
-        return employeeRepository.updateEmployee(id, employee);
+        Employee oldEmployee = employeeRepository.getById(id);
+        employee.setEmployeeId(id);
+        employee.setUpdatedAt(new Date());
+        employee.setCreatedAt(oldEmployee.getCreatedAt());
+        employeeRepository.save(employee);
+        return employee;
     }
 
 }

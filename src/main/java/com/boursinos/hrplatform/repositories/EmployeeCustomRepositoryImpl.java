@@ -23,11 +23,4 @@ public class EmployeeCustomRepositoryImpl implements EmployeeCustomRepository {
         return employee.getEmployeeId();
     }
 
-    @Override
-    public Employee updateEmployee(String id, Employee employee){
-        employee.setEmployeeId(id);
-        employee.setUpdatedAt(new Date());
-        entityManager.merge(employee);
-        return employee;
-    }
 }

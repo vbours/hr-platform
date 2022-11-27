@@ -6,6 +6,4 @@ public interface EmployeeCustomRepository{
 
     String saveEmployee(Employee employee);
 
-    Employee updateEmployee(String id, Employee employee);
-
 }
