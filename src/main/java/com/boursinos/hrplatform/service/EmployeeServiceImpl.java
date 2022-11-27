@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -21,6 +23,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.entityManager = entityManager;
     }
 
+    @Override
+    public List<Employee> getAllEmployees(){
+       return employeeRepository.findAll();
+    }
+
+    @Override
+    public Optional<Employee> getEmployee(String id){
+        return employeeRepository.findById(id);
+    }
+
     @Transactional
     public String saveEmployee(Employee employee){
         employee.setCreatedAt(new Date());
@@ -32,6 +44,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteEmployee(String id){
         employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public Employee updateEmployee(String id, Employee employee){
+        employee.setEmployeeId(id);
+        employee.setUpdatedAt(new Date());
+        entityManager.merge(employee);
+        return employee;
     }
 
 }

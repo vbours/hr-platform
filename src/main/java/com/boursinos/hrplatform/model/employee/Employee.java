@@ -17,7 +17,6 @@ public class Employee {
 
     @Id @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @JsonIgnore
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "employee_id")
     private String employeeId;
