@@ -3,12 +3,9 @@ package com.boursinos.hrplatform.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -16,49 +13,59 @@ import java.util.Date;
 @Table(name = "Employee")
 public class Employee {
 
-    @Id
-    @JsonProperty("_id")
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @JsonIgnore
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "employee_id")
-    private String id;
+    private String employeeId;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "firstname")
     private String firstname;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "lastname")
     private String lastname;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "gender")
     private Gender gender;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "address")
     private String address;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "postCode")
     private String postCode;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "telNumber")
     private String telNumber;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "contractType")
     private ContractType contractType;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "totalHolidays")
     private int totalHolidays;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "salary")
     private int salary;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "contractStart")
     private Date contractStart;
 
-    public String getId() {
-        return id;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getFirstname() {
@@ -144,7 +151,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id='" + id + '\'' +
+                "id='" + employeeId + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", gender=" + gender +

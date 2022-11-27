@@ -32,8 +32,7 @@ public class EmployeeController {
     public @ResponseBody ResponseEntity<String> saveEmployee(
             @RequestBody Employee employee) throws Exception {
         logger.info(String.format("Save Employee request : %s" , employee.toString()));
-        employeeService.saveEmployee(employee);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        String id = employeeService.saveEmployee(employee);
+        return new ResponseEntity<>(id,HttpStatus.OK);
     }
-
 }
