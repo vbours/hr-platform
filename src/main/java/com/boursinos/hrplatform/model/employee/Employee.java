@@ -1,9 +1,11 @@
-package com.boursinos.hrplatform.model;
+package com.boursinos.hrplatform.model.employee;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -33,6 +35,10 @@ public class Employee {
     private Gender gender;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "year_of_birth")
+    private int yearOfBirth;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "address")
     private String address;
 
@@ -59,6 +65,17 @@ public class Employee {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "contractStart")
     private Date contractStart;
+
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdAt;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date updatedAt;
 
     public String getEmployeeId() {
         return employeeId;
@@ -146,6 +163,30 @@ public class Employee {
 
     public void setContractStart(Date contractStart) {
         this.contractStart = contractStart;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override

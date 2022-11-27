@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.controllers;
 
-import com.boursinos.hrplatform.model.Employee;
+import com.boursinos.hrplatform.model.employee.Employee;
 import com.boursinos.hrplatform.service.EmployeeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +33,19 @@ public class EmployeeController {
             @RequestBody Employee employee) throws Exception {
         logger.info(String.format("Save Employee request : %s" , employee.toString()));
         String id = employeeService.saveEmployee(employee);
+        return new ResponseEntity<>(id,HttpStatus.OK);
+    }
+
+    /**
+     * This endpoint save employee data to the db.
+     *
+     * @param id id of the employee in the db that we want to delete
+     */
+    @DeleteMapping(value = "/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<String> deleteEmployee(
+            @RequestParam String id) throws Exception {
+        logger.info(String.format("delete Employee request id : %s" , id));
+        employeeService.deleteEmployee(id);
         return new ResponseEntity<>(id,HttpStatus.OK);
     }
 }

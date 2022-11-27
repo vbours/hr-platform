@@ -1,13 +1,13 @@
-package com.boursinos.hrplatform.model;
+package com.boursinos.hrplatform.model.employee;
 
-public enum Gender {
-    MALE("male"),
-    FEMALE("female"),
-    OTHER("other");
+public enum ContractType {
+    FULL_TIME("fullTime"),
+    PART_TIME("partTime"),
+    CONTRACTOR("CONTRACTOR");
 
     private final String value;
 
-    Gender(final String value) {
+    ContractType(final String value) {
         this.value = value;
     }
 
