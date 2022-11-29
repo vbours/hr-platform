@@ -23,14 +23,26 @@ public class AbsenceController {
     AbsenceService absenceService;
 
     /**
+     * This endpoint return all the absence request.
+     *
+     * @return absences (List<Absences>)
+     */
+    @GetMapping(value = "/absence", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<List<Absence>> getAllAbsences() {
+        logger.info("Get all absences request");
+        List<Absence> absences = absenceService.getAllAbsences();
+        return new ResponseEntity<>(absences,HttpStatus.OK);
+    }
+
+    /**
      * This endpoint return all the absence request per employee.
      *
-     * @return absences (List<Absences></>)
+     * @return absences (List<Absences>)
      */
     @GetMapping(value = "/employee/{employee_id}/absence", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<List<Absence>> getAllAbsences(@RequestParam String employeeId) {
+    public @ResponseBody ResponseEntity<List<Absence>> getAllAbsencesByEmployee(@RequestParam String employeeId) {
         logger.info(String.format("Get all absences request for employee : %s" , employeeId));
-        List<Absence> absences = absenceService.getAllAbsences(employeeId);
+        List<Absence> absences = absenceService.getAllAbsencesByEmployee(employeeId);
         return new ResponseEntity<>(absences,HttpStatus.OK);
     }
 

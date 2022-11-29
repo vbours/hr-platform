@@ -21,8 +21,14 @@ public class AbsenceServiceImpl implements AbsenceService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public List<Absence> getAllAbsences(String employeeId){
-       return absenceRepository.findAll();
+    public List<Absence> getAllAbsences(){
+        return absenceRepository.findAll();
+    }
+
+    @Override
+    public List<Absence> getAllAbsencesByEmployee(String employeeId){
+        Employee employee = employeeRepository.getById(employeeId);
+        return absenceRepository.findByEmployee(employee);
     }
 
     @Override

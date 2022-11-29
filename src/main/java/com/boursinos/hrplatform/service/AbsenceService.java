@@ -6,7 +6,9 @@ import java.util.Optional;
 
 public interface AbsenceService {
 
-    List<Absence> getAllAbsences(String employeeId);
+    List<Absence> getAllAbsences();
+
+    List<Absence> getAllAbsencesByEmployee(String employeeId);
 
     Optional<Absence> getAbsence(String employee_id, String absence_id);
 
