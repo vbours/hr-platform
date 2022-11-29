@@ -56,11 +56,11 @@ public class EmployeeController {
      * @return id (str)
      * @throws IOException in case of input/output exception
      */
-    @PostMapping(value = "/employee", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "branch/{branch_id}/employee", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> saveEmployee(
-            @RequestBody Employee employee) throws Exception {
-        logger.info(String.format("Save Employee request : %s" , employee.toString()));
-        String id = employeeService.saveEmployee(employee);
+            @RequestBody Employee employee, @RequestParam String branchId) throws Exception {
+        logger.info(String.format("Save for branch %s - Employee request : %s" , branchId, employee.toString()));
+        String id = employeeService.saveEmployee(employee, branchId);
         return new ResponseEntity<>(id,HttpStatus.CREATED);
     }
 
@@ -71,7 +71,7 @@ public class EmployeeController {
      * @return id (str)
      * @throws IOException in case of input/output exception
      */
-    @PutMapping(value = "/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "branch/{branch_id}/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Employee> updateEmployee(
             @RequestBody Employee employee, @RequestParam String id) {
         logger.info(String.format("Update Employee request : %s" , employee.toString()));
@@ -84,7 +84,7 @@ public class EmployeeController {
      *
      * @param id id of the employee in the db that we want to delete
      */
-    @DeleteMapping(value = "/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "branch/{brunch_id}/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> deleteEmployee(
             @RequestParam String id) throws Exception {
         logger.info(String.format("Delete Employee request id : %s" , id));

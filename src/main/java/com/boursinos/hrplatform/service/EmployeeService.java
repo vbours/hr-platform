@@ -8,8 +8,10 @@ import java.util.Optional;
 public interface EmployeeService {
 
     List<Employee> getAllEmployees();
+
     public Optional<Employee> getEmployee(String id);
-    String saveEmployee(Employee employee);
+
+    String saveEmployee(Employee employee, String branchId);
 
     void deleteEmployee(String id);
 

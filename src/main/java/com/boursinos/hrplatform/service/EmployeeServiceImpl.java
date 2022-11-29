@@ -1,7 +1,7 @@
 package com.boursinos.hrplatform.service;
 
 import com.boursinos.hrplatform.model.employee.Employee;
-import com.boursinos.hrplatform.repositories.EmployeeRepository;
+import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Transactional
-    public String saveEmployee(Employee employee){
-        return employeeRepository.saveEmployee(employee);
+    public String saveEmployee(Employee employee, String branchId){
+        return employeeRepository.saveEmployee(employee, branchId);
     }
 
     @Override
