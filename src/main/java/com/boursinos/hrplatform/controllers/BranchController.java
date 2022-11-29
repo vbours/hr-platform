@@ -45,7 +45,7 @@ public class BranchController {
      */
     @GetMapping(value = "/branch/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Optional<Branch>> getBranch(@RequestParam String branch_id) {
-        logger.info(String.format("Get Branch request - id : ",branch_id));
+        logger.info(String.format("Get Branch request - id : %s ",branch_id));
         Optional<Branch> branch = branchService.getBranch(branch_id);
         return new ResponseEntity<>(branch,HttpStatus.OK);
     }
