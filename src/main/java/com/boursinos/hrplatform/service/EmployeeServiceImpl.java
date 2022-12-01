@@ -1,6 +1,8 @@
 package com.boursinos.hrplatform.service;
 
+import com.boursinos.hrplatform.model.branch.Branch;
 import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.repositories.branch.BranchRepository;
 import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private BranchRepository branchRepository;
+
     @Override
     public List<Employee> getAllEmployees(){
        return employeeRepository.findAll();
@@ -26,9 +31,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    @Transactional
+    @Override
     public String saveEmployee(Employee employee, String branchId){
-        return employeeRepository.saveEmployee(employee, branchId);
+        Branch branch = branchRepository.getById(branchId);
+        employee.setCreatedAt(new Date());
+        employee.setUpdatedAt(new Date());
+        employee.setBranch(branch);
+        return employeeRepository.save(employee).getEmployeeId();
     }
 
     @Override
