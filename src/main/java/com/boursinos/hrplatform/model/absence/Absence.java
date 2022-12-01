@@ -47,6 +47,10 @@ public class Absence {
     @Column(name = "absence_type")
     private AbsenceType absenceType;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "absence_status")
+    private AbsenceStatus absenceStatus;
+
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
