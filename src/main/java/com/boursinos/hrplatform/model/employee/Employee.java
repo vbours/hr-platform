@@ -45,7 +45,7 @@ public class Employee {
     private String address;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "postCode")
+    @Column(name = "post_code")
     private String postCode;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -53,19 +53,23 @@ public class Employee {
     private String telNumber;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "contractType")
+    @Column(name = "contract_type")
     private ContractType contractType;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "totalHolidays")
+    @Column(name = "total_holidays")
     private int totalHolidays;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "remaining_holidays")
+    private int remainingHolidays;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "salary")
     private int salary;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "contractStart")
+    @Column(name = "contract_start")
     private Date contractStart;
 
 
