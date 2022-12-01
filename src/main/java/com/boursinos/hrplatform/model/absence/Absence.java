@@ -126,5 +126,11 @@ public class Absence {
         this.updatedAt = updatedAt;
     }
 
+    public AbsenceStatus getAbsenceStatus() {
+        return absenceStatus;
+    }
 
+    public void setAbsenceStatus(AbsenceStatus absenceStatus) {
+        this.absenceStatus = absenceStatus;
+    }
 }
