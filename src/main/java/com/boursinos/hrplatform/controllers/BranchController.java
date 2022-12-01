@@ -28,7 +28,7 @@ public class BranchController {
     /**
      * This endpoint return all the branches from the db.
      *
-     * @return employess (List<Employee></>)
+     * @return employess (List<Employee>)
      */
     @GetMapping(value = "/branch", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<List<Branch>> getAllBranches() {
@@ -40,13 +40,13 @@ public class BranchController {
     /**
      * This endpoint return a specific branch given an id.
      *
-     * @param branch_id the id of the employee
+     * @param branchId the id of the employee
      * @return employee
      */
-    @GetMapping(value = "/branch/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Optional<Branch>> getBranch(@RequestParam String branch_id) {
-        logger.info(String.format("Get Branch request - id : %s ",branch_id));
-        Optional<Branch> branch = branchService.getBranch(branch_id);
+    @GetMapping(value = "/branch/{branch_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<Optional<Branch>> getBranch(@RequestParam String branchId) {
+        logger.info(String.format("Get Branch request - id : %s ",branchId));
+        Optional<Branch> branch = branchService.getBranch(branchId);
         return new ResponseEntity<>(branch,HttpStatus.OK);
     }
 
@@ -56,11 +56,10 @@ public class BranchController {
      *
      * @param branch request class for saving data
      * @return id (str)
-     * @throws IOException in case of input/output exception
      */
     @PostMapping(value = "/branch", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> saveBranch(
-            @RequestBody Branch branch) throws Exception {
+            @RequestBody Branch branch) {
         logger.info(String.format("Save Branch request : %s" , branch.toString()));
         String id = branchService.saveBranch(branch);
         return new ResponseEntity<>(id,HttpStatus.CREATED);
@@ -70,27 +69,28 @@ public class BranchController {
      * This endpoint updates branch data to the db.
      *
      * @param branch request class for saving data
+     * @param branchId the id of the branch to update
      * @return id (str)
      * @throws IOException in case of input/output exception
      */
-    @PutMapping(value = "/branch/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/branch/{branch_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Branch> updateBranch(
-            @RequestBody Branch branch, @RequestParam String id) {
-        logger.info(String.format("Update Branch request : %s" , branch.toString()));
-        Branch updatedBranch = branchService.updateBranch(id,branch);
+            @RequestBody Branch branch, @RequestParam String branchId) {
+        logger.info(String.format("Update Branch id : %s -  request : %s" , branchId, branch.toString()));
+        Branch updatedBranch = branchService.updateBranch(branchId,branch);
         return new ResponseEntity<>(updatedBranch,HttpStatus.CREATED);
     }
 
     /**
      * This endpoint deletes branch data from the db.
      *
-     * @param id id of the branch in the db that we want to delete
+     * @param branchId id of the branch in the db that we want to delete
      */
-    @DeleteMapping(value = "/branch/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/branch/{branch_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> deleteBranch(
-            @RequestParam String id) throws Exception {
-        logger.info(String.format("Delete Branch request id : %s" , id));
-        branchService.deleteBranch(id);
-        return new ResponseEntity<>(id,HttpStatus.OK);
+            @RequestParam String branchId) throws Exception {
+        logger.info(String.format("Delete Branch request id : %s" , branchId));
+        branchService.deleteBranch(branchId);
+        return new ResponseEntity<>(branchId,HttpStatus.OK);
     }
 }

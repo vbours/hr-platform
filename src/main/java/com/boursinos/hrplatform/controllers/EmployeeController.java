@@ -38,13 +38,13 @@ public class EmployeeController {
     /**
      * This endpoint return a specific employee given an id.
      *
-     * @param employee_id the id of the employee
+     * @param employeeId the id of the employee
      * @return employee
      */
-    @GetMapping(value = "/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Optional<Employee>> getEmployee(@RequestParam String employee_id) {
-        logger.info(String.format("Get Employee request - id : ",employee_id));
-        Optional<Employee> employee = employeeService.getEmployee(employee_id);
+    @GetMapping(value = "/employee/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<Optional<Employee>> getEmployee(@RequestParam String employeeId) {
+        logger.info(String.format("Get Employee request - id : ",employeeId));
+        Optional<Employee> employee = employeeService.getEmployee(employeeId);
         return new ResponseEntity<>(employee,HttpStatus.OK);
     }
 
@@ -53,12 +53,13 @@ public class EmployeeController {
      * This endpoint saves employee data to the db.
      *
      * @param employee request class for saving data
+     * @param branchId the specific id of the branch where the employee is working
      * @return id (str)
      * @throws IOException in case of input/output exception
      */
     @PostMapping(value = "branch/{branch_id}/employee", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> saveEmployee(
-            @RequestBody Employee employee, @RequestParam String branchId) throws Exception {
+            @RequestBody Employee employee, @RequestParam String branchId) {
         logger.info(String.format("Save for branch %s - Employee request : %s" , branchId, employee.toString()));
         String id = employeeService.saveEmployee(employee, branchId);
         return new ResponseEntity<>(id,HttpStatus.CREATED);
@@ -71,24 +72,24 @@ public class EmployeeController {
      * @return id (str)
      * @throws IOException in case of input/output exception
      */
-    @PutMapping(value = "branch/{branch_id}/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "branch/{branch_id}/employee/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Employee> updateEmployee(
-            @RequestBody Employee employee, @RequestParam String id) {
-        logger.info(String.format("Update Employee request : %s" , employee.toString()));
-        Employee updatedEmployee = employeeService.updateEmployee(id,employee);
+            @RequestBody Employee employee, @RequestParam String branchId, @RequestParam String employeeId) {
+        logger.info(String.format("Update Employee request employee_id : %s, branch_id : %s, employee_data : %s" , employeeId, branchId, employee.toString()));
+        Employee updatedEmployee = employeeService.updateEmployee(branchId,employee);
         return new ResponseEntity<>(updatedEmployee,HttpStatus.CREATED);
     }
 
     /**
      * This endpoint deletes employee data from the db.
      *
-     * @param id id of the employee in the db that we want to delete
+     * @param employeeId id of the employee in the db that we want to delete
      */
-    @DeleteMapping(value = "branch/{brunch_id}/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/employee/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> deleteEmployee(
-            @RequestParam String id) throws Exception {
-        logger.info(String.format("Delete Employee request id : %s" , id));
-        employeeService.deleteEmployee(id);
-        return new ResponseEntity<>(id,HttpStatus.OK);
+            @RequestParam String employeeId) throws Exception {
+        logger.info(String.format("Delete Employee request id : %s" , employeeId));
+        employeeService.deleteEmployee(employeeId);
+        return new ResponseEntity<>(employeeId,HttpStatus.OK);
     }
 }

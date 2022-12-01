@@ -49,14 +49,13 @@ public class AbsenceController {
     /**
      * This endpoint return a specific absence for a specific employee given an id.
      *
-     * @param employee_id the id of the employee
-     * @param id the id of the absence
+     * @param absenceId the id of the absence
      * @return absence
      */
-    @GetMapping(value = "/employee/{employee_id}/absence/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Optional<Absence>> getAbsence(@RequestParam String employee_id, @RequestParam String id) {
-        logger.info(String.format("Get absence request - id : %s , for employee : %s ", id, employee_id));
-        Optional<Absence> absence = absenceService.getAbsence(employee_id, id);
+    @GetMapping(value = "/absence/{absence_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<Optional<Absence>> getAbsence(@RequestParam String absenceId) {
+        logger.info(String.format("Get absence request - id : %s ", absenceId));
+        Optional<Absence> absence = absenceService.getAbsence(absenceId);
         return new ResponseEntity<>(absence,HttpStatus.OK);
     }
 
@@ -65,14 +64,14 @@ public class AbsenceController {
      * This endpoint saves absence data to the db.
      *
      * @param absence request class for saving data
-     * @param employee_id the id of the employee
+     * @param employeeId the id of the employee
      * @return id (str)
      */
     @PostMapping(value = "/employee/{employee_id}/absence", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> saveAbsence(
-            @RequestBody Absence absence, @RequestParam String employee_id) {
-        logger.info(String.format("Save Absence request : %s, for employee: %s " , absence.toString(), employee_id));
-        String id = absenceService.saveAbsence(absence, employee_id);
+            @RequestBody Absence absence, @RequestParam String employeeId) {
+        logger.info(String.format("Save Absence request : %s, for employee: %s " , absence.toString(), employeeId));
+        String id = absenceService.saveAbsence(absence, employeeId);
         return new ResponseEntity<>(id,HttpStatus.CREATED);
     }
 
@@ -80,28 +79,29 @@ public class AbsenceController {
      * This endpoint updates absence data to the db.
      *
      * @param absence request class for saving data
-     * @param employee_id the id of the employee
+     * @param absenceId the specific id for the absence
+     * @param employeeId the id of the employee
      * @id the id of the absence
      * @return absence (Absence)
      */
-    @PutMapping(value = "/employee/{employee_id}/absence/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/employee/{employee_id}/absence/{absence_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<Absence> updateAbsence(
-            @RequestBody Absence absence, @RequestParam String employee_id, @RequestParam String id) {
-        logger.info(String.format("Update absence request : %s, for absence_id : %s, for employee : %s" , absence.toString(), id, employee_id));
-        Absence updatedAbsence = absenceService.updateAbsence(employee_id, id, absence);
+            @RequestBody Absence absence, @RequestParam String employeeId, @RequestParam String absenceId) {
+        logger.info(String.format("Update absence request : %s, for absence_id : %s, for employee : %s" , absence.toString(), absenceId, employeeId));
+        Absence updatedAbsence = absenceService.updateAbsence(employeeId, absenceId, absence);
         return new ResponseEntity<>(updatedAbsence,HttpStatus.CREATED);
     }
 
     /**
      * This endpoint deletes absence data from the db.
      *
-     * @param id id of the absence in the db that we want to delete
+     * @param absenceId id of the absence in the db that we want to delete
      */
-    @DeleteMapping(value = "/employee/{employee_id}/absence/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/absence/{absence_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> deleteAbsence(
-            @RequestParam String employee_id, @RequestParam String id){
-        logger.info(String.format("Delete absence request id : %s , for employee : %S " , id, employee_id));
-        absenceService.deleteAbsence(id);
-        return new ResponseEntity<>(id,HttpStatus.OK);
+            @RequestParam String employee_id, @RequestParam String absenceId){
+        logger.info(String.format("Delete absence request id : %s , for employee : %S " , absenceId, employee_id));
+        absenceService.deleteAbsence(absenceId);
+        return new ResponseEntity<>(absenceId,HttpStatus.OK);
     }
 }

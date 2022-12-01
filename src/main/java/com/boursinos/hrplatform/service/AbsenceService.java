@@ -10,7 +10,7 @@ public interface AbsenceService {
 
     List<Absence> getAllAbsencesByEmployee(String employeeId);
 
-    Optional<Absence> getAbsence(String employee_id, String absence_id);
+    Optional<Absence> getAbsence(String absence_id);
 
     String saveAbsence(Absence absence, String employee_id);
 

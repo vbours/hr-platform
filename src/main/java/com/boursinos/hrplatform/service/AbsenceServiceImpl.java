@@ -32,7 +32,7 @@ public class AbsenceServiceImpl implements AbsenceService {
     }
 
     @Override
-    public Optional<Absence> getAbsence(String employeeId, String absenceId){
+    public Optional<Absence> getAbsence(String absenceId){
         return absenceRepository.findById(absenceId);
     }
 
