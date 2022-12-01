@@ -10,12 +10,12 @@ public interface AbsenceService {
 
     List<Absence> getAllAbsencesByEmployee(String employeeId);
 
-    Optional<Absence> getAbsence(String absence_id);
+    Optional<Absence> getAbsence(String absenceId);
 
-    String saveAbsence(Absence absence, String employee_id);
+    String saveAbsence(Absence absence, String employeeId);
 
-    void deleteAbsence(String absence_id);
+    void deleteAbsence(String absenceId);
 
-    Absence updateAbsence(String employee_id, String absence_id, Absence absence);
+    Absence updateAbsence(String employeeId, String absenceId, Absence absence);
 
 }

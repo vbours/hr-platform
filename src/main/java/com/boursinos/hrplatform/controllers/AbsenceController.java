@@ -98,9 +98,8 @@ public class AbsenceController {
      * @param absenceId id of the absence in the db that we want to delete
      */
     @DeleteMapping(value = "/absence/{absence_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<String> deleteAbsence(
-            @RequestParam String employee_id, @RequestParam String absenceId){
-        logger.info(String.format("Delete absence request id : %s , for employee : %S " , absenceId, employee_id));
+    public @ResponseBody ResponseEntity<String> deleteAbsence(@RequestParam String absenceId){
+        logger.info(String.format("Delete absence request id : %s" , absenceId));
         absenceService.deleteAbsence(absenceId);
         return new ResponseEntity<>(absenceId,HttpStatus.OK);
     }
