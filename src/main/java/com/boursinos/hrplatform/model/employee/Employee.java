@@ -212,17 +212,22 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id='" + employeeId + '\'' +
+                "employeeId='" + employeeId + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", gender=" + gender +
-                ", Address='" + address + '\'' +
+                ", yearOfBirth=" + yearOfBirth +
+                ", address='" + address + '\'' +
                 ", postCode='" + postCode + '\'' +
                 ", telNumber='" + telNumber + '\'' +
                 ", contractType=" + contractType +
                 ", totalHolidays=" + totalHolidays +
+                ", remainingHolidays=" + remainingHolidays +
                 ", salary=" + salary +
                 ", contractStart=" + contractStart +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", branch=" + branch +
                 '}';
     }
 }

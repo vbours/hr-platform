@@ -3,15 +3,20 @@ package com.boursinos.hrplatform.repositories.employee;
 import com.boursinos.hrplatform.model.branch.Branch;
 import com.boursinos.hrplatform.model.employee.Employee;
 import com.boursinos.hrplatform.repositories.branch.BranchRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.util.Date;
+import java.util.*;
 
 public class EmployeeCustomRepositoryImpl implements EmployeeCustomRepository {
 
     EntityManager entityManager;
+
+    static final Logger logger = Logger.getLogger(EmployeeCustomRepositoryImpl.class);
+
 
     @Autowired
     private BranchRepository branchRepository;
@@ -29,6 +34,12 @@ public class EmployeeCustomRepositoryImpl implements EmployeeCustomRepository {
         employee.setBranch(branch);
         entityManager.persist(employee);
         return employee.getEmployeeId();
+    }
+
+    @Override
+    public List getEmployeesPerBranch() {
+        Query query = entityManager.createQuery("SELECT e FROM Employee e INNER JOIN e.branch b");
+        return query.getResultList();
     }
 
 }
