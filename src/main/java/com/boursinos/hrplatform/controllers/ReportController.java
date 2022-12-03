@@ -45,4 +45,16 @@ public class ReportController {
         Map<String,Integer> getTotalManPower = reportService.getTotalEmployeesPerBranchMap();
         return new ResponseEntity<>(getTotalManPower, HttpStatus.OK);
     }
+
+    /**
+     * This endpoint return the total salary of employees per branch.
+     *
+     * @return
+     */
+    @GetMapping(value = "/report/total-salary", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<Map<String, Integer>> getTotalSalaryPerBranch() {
+        logger.info("Get total number of employees salaries per branch");
+        Map<String,Integer> getTotalManPower = reportService.getEmployeesTotalSalaryPerBranchMap();
+        return new ResponseEntity<>(getTotalManPower, HttpStatus.OK);
+    }
 }

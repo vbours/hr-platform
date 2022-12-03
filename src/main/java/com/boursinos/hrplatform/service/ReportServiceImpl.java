@@ -45,4 +45,17 @@ public class ReportServiceImpl implements ReportService{
         logger.info(employeeCounterMap.toString());
         return employeeCounterMap;
     }
+
+    @Override
+    public Map<String, Integer> getEmployeesTotalSalaryPerBranchMap() {
+        List<Employee> resultList = employeeRepository.getEmployeesPerBranch();
+        Map<String, Integer> totalSalaryMap = new HashMap<>();
+
+        for (Employee employee : resultList) {
+            totalSalaryMap.put(employee.getBranch().getBranchId(), totalSalaryMap.getOrDefault(employee.getBranch().getBranchId(), 0) + employee.getSalary());
+
+        }
+        logger.info(totalSalaryMap.toString());
+        return totalSalaryMap;
+    }
 }

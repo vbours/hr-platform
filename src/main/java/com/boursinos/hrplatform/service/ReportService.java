@@ -8,5 +8,6 @@ import java.util.Map;
 public interface ReportService {
     Map<String, List<Employee>> getEmployeesPerBranchMap();
     Map<String, Integer> getTotalEmployeesPerBranchMap();
+    Map<String, Integer> getEmployeesTotalSalaryPerBranchMap();
 
-}
+    }
