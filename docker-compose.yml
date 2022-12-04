@@ -40,6 +40,22 @@ services:
     networks:
       - hr-network
 
+  minio-s3:
+    image: minio/minio
+    container_name: db-ingestor-minio
+    restart: always
+    #    command: minio server /data/minio/
+    command: minio server /data/minio/ --address :9001
+    ports:
+      - ${S3_UI_PORT}:9001
+    environment:
+      MINIO_ACCESS_KEY: ${S3_KEY}
+      MINIO_SECRET_KEY: ${S3_SECRET}
+    volumes:
+      - s3:/data/minio
+    networks:
+      - hr-network
+
 volumes:
   postgres:
 
