@@ -58,6 +58,7 @@ services:
 
 volumes:
   postgres:
+  s3:
 
 networks:
   hr-network:
