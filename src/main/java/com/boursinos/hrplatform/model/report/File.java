@@ -3,6 +3,7 @@ package com.boursinos.hrplatform.model.report;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,6 +19,7 @@ import java.util.Date;
 @Entity
 @JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 @Table(name = "File")
+@NoArgsConstructor
 public class File {
 
     @Id
@@ -48,4 +50,10 @@ public class File {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+
+    public File(String filename, String type, String bucket) {
+        this.filename = filename;
+        this.type = type;
+        this.bucket = bucket;
+    }
 }

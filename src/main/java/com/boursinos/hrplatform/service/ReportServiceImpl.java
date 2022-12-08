@@ -2,10 +2,11 @@ package com.boursinos.hrplatform.service;
 
 import com.boursinos.hrplatform.clients.MinioClients;
 import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.report.File;
 import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
+import com.boursinos.hrplatform.repositories.file.FileRepository;
 import com.boursinos.hrplatform.utils.FileUtils;
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class ReportServiceImpl implements ReportService{
     @Autowired
     private MinioClients minioClients;
 
+    @Autowired
+    private FileRepository fileRepository;
+
     @Override
     public Map<String, List<Employee>> getEmployeesPerBranchMap() {
         List<Employee> resultList = employeeRepository.getEmployeesPerBranch();
@@ -50,6 +54,7 @@ public class ReportServiceImpl implements ReportService{
         } catch (NoSuchAlgorithmException | IOException | InvalidKeyException e) {
             throw new RuntimeException(e);
         }
+        fileRepository.saveFile(new File(filename,null,bucket));
         logger.info(branchMap.toString());
         return branchMap;
     }
@@ -79,4 +84,5 @@ public class ReportServiceImpl implements ReportService{
         logger.info(totalSalaryMap.toString());
         return totalSalaryMap;
     }
+
 }
