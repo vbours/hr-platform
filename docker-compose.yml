@@ -1,17 +1,17 @@
 version: "2.4"
 services:
-#  hr-platform:
-#    image: hr-platform-2022
-#    build:
-#      context: ./
-#      dockerfile: docker/Dockerfile
-#    container_name: hr-platform
-#    restart: always
-#    env_file: .env
-#    ports:
-#      - 8099:8099
-#    networks:
-#      - hr-network
+  hr-platform:
+    image: hr-platform-2022
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    container_name: hr-platform
+    restart: always
+    env_file: .env
+    ports:
+      - 8090:8090
+    networks:
+      - hr-network
 
 #  redis:
 #    image: redis:alpine
@@ -40,8 +40,25 @@ services:
     networks:
       - hr-network
 
+  minio-s3:
+    image: minio/minio
+    container_name: db-ingestor-minio
+    restart: always
+    #    command: minio server /data/minio/
+    command: minio server /data/minio/ --address :9001
+    ports:
+      - ${S3_UI_PORT}:9001
+    environment:
+      MINIO_ACCESS_KEY: ${S3_KEY}
+      MINIO_SECRET_KEY: ${S3_SECRET}
+    volumes:
+      - s3:/data/minio
+    networks:
+      - hr-network
+
 volumes:
   postgres:
+  s3:
 
 networks:
   hr-network:
