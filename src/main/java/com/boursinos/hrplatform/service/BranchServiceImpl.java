@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BranchServiceImpl implements BranchService {
@@ -19,6 +20,11 @@ public class BranchServiceImpl implements BranchService {
     @Override
     public List<Branch> getAllBranches(){
        return branchRepository.findAll();
+    }
+
+    @Override
+    public List<Branch> getAllBranches(int count) {
+        return this.branchRepository.findAll().stream().limit(count).collect(Collectors.toList());
     }
 
     @Override
@@ -45,5 +51,17 @@ public class BranchServiceImpl implements BranchService {
         branchRepository.save(branch);
         return branch;
     }
+
+    @Override
+    public Branch createBranch(String address, String city, String country) {
+        final Branch branch = new Branch();
+        branch.setAddress(address);
+        branch.setCity(city);
+        branch.setCountry(country);
+        branch.setCreatedAt(new Date());
+        branch.setUpdatedAt(new Date());
+        return this.branchRepository.save(branch);
+    }
+
 
 }

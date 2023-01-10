@@ -3,6 +3,7 @@
 ### Technologies ###
 
 * Java Spring Boot
+* Rest / Graphql
 * JPA - Hibernate
 * Minio
 * Unit tests with test containers
@@ -15,7 +16,7 @@ Java Spring Boot application (microservice) which is connected with
 a postgres db in order to execute the basic hr functionalities. There are tables about 
 company's employees, company's branches, employee's days off, employee's overtime and
 some information about the reporting files that we produce from our platform.
-THe hr user can see all of those data from those tables and finaly he can export some
+The hr user can see all of those data from those tables and finally he can export some
 reports. The produced reports are stored to s3/minio storage and the user 
 can download them and see them.
 
@@ -23,6 +24,7 @@ can download them and see them.
 
 <li>Language : Java
 <li>Framework : Spring boot, JPA, Hibernate
+<li>Rest Api , Graphql
 <li>Unit Tests
 <li>Dockerized
 <li>Swagger - Open-api Documentation
@@ -41,3 +43,5 @@ can download them and see them.
 swagger: http://localhost:8090/swagger-ui.html
 
 minio server: localhost:9001
+
+graphql: http://localhost:8090/graphiql
