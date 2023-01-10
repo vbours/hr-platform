@@ -209,6 +209,14 @@ public class Employee {
         this.branch = branch;
     }
 
+    public int getRemainingHolidays() {
+        return remainingHolidays;
+    }
+
+    public void setRemainingHolidays(int remainingHolidays) {
+        this.remainingHolidays = remainingHolidays;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +

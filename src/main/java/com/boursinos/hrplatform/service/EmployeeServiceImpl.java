@@ -2,6 +2,7 @@ package com.boursinos.hrplatform.service;
 
 import com.boursinos.hrplatform.model.branch.Branch;
 import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.employee.Gender;
 import com.boursinos.hrplatform.repositories.branch.BranchRepository;
 import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -24,6 +26,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> getAllEmployees(){
        return employeeRepository.findAll();
+    }
+
+    @Override
+    public List<Employee> getAllEmployees(int count) {
+        return this.employeeRepository.findAll().stream().limit(count).collect(Collectors.toList());
     }
 
     @Override
@@ -53,6 +60,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setCreatedAt(oldEmployee.getCreatedAt());
         employeeRepository.save(employee);
         return employee;
+    }
+
+    @Override
+    public Employee createEmployee(String firstname, String lastname, String gender, int yearOfBirth, String address, String postCode, String telNumber, int totalHolidays, int remainingHolidays, int salary) {
+        final Employee employee = new Employee();
+        employee.setFirstname(firstname);
+        employee.setLastname(lastname);
+        employee.setGender(Gender.MALE);
+        employee.setYearOfBirth(yearOfBirth);
+        employee.setAddress(address);
+        employee.setPostCode(postCode);
+        employee.setTelNumber(telNumber);
+        employee.setTotalHolidays(totalHolidays);
+        employee.setRemainingHolidays(remainingHolidays);
+        employee.setSalary(salary);
+        employee.setCreatedAt(new Date());
+        employee.setUpdatedAt(new Date());
+        return this.employeeRepository.save(employee);
     }
 
 }
