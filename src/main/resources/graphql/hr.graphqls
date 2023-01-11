@@ -12,11 +12,21 @@ type Employee {
 	salary: Int,
 }
 
+type Branch {
+	branchId: ID!,
+	address: String,
+	city: String,
+	country: String,
+}
+
 type Query {
+	branches(count: Int):[Branch]
+	branch(id: ID):Branch
 	employees(count: Int):[Employee]
-	employee(id: ID):Employee
+    employee(id: ID):Employee
 }
 
 type Mutation {
+	createBranch(address: String!, city: String!, country: String):Branch
 	createEmployee(firstname: String!, lastname: String!, gender: String, yearOfBirth: Int, address: String, postCode: String, telNumber: String, totalHolidays: Int, remainingHolidays: Int, salary: Int):Employee
 }
