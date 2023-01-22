@@ -8,6 +8,8 @@ public interface AbsenceService {
 
     List<Absence> getAllAbsences();
 
+    List<Absence> getAllAbsences(final int count);
+
     List<Absence> getAllAbsencesByEmployee(String employeeId);
 
     Optional<Absence> getAbsence(String absenceId);

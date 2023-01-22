@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AbsenceServiceImpl implements AbsenceService {
@@ -29,6 +30,10 @@ public class AbsenceServiceImpl implements AbsenceService {
     public List<Absence> getAllAbsencesByEmployee(String employeeId){
         Employee employee = employeeRepository.getById(employeeId);
         return absenceRepository.findByEmployee(employee);
+    }
+
+    public List<Absence> getAllAbsences(final int count) {
+        return this.absenceRepository.findAll().stream().limit(count).collect(Collectors.toList());
     }
 
     @Override
