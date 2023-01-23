@@ -54,4 +54,10 @@ public class Branch {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+
+    public Branch(String address, String city, String country) {
+        this.address = address;
+        this.city = city;
+        this.country = country;
+    }
 }

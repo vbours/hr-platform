@@ -89,6 +89,24 @@ public class Employee {
     @JsonIgnore
     private Branch branch;
 
+    public Employee() {
+    }
+
+    public Employee(String firstname, String lastname, Gender gender, int yearOfBirth, String address, String postCode,
+                    String telNumber, ContractType contractType, int totalHolidays, int remainingHolidays, int salary) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.yearOfBirth = yearOfBirth;
+        this.address = address;
+        this.postCode = postCode;
+        this.telNumber = telNumber;
+        this.contractType = contractType;
+        this.totalHolidays = totalHolidays;
+        this.remainingHolidays = remainingHolidays;
+        this.salary = salary;
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }
