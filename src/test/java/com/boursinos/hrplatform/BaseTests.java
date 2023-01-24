@@ -42,7 +42,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 @EnableJpaRepositories(basePackageClasses = {RepositoryPackage.class})
 @EntityScan(basePackageClasses = {ModelPackage.class})
 @PropertySource("classpath:application.properties")
-@Import(InternalDatabaseConfig.class)
+@Import({InternalDatabaseConfig.class})
 public class BaseTests {
 
     private final Logger logger = Logger.getLogger(BaseTests.class);
