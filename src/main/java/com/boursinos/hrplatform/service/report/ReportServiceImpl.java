@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.service;
+package com.boursinos.hrplatform.service.report;
 
 import com.boursinos.hrplatform.clients.MinioClients;
 import com.boursinos.hrplatform.model.employee.Employee;
