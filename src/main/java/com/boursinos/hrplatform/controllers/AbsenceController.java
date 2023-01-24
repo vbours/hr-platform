@@ -1,7 +1,7 @@
 package com.boursinos.hrplatform.controllers;
 
 import com.boursinos.hrplatform.model.absence.Absence;
-import com.boursinos.hrplatform.service.AbsenceService;
+import com.boursinos.hrplatform.service.absence.AbsenceService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

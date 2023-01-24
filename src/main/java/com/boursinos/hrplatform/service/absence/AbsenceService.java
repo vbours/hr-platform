@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.service;
+package com.boursinos.hrplatform.service.absence;
 
 import com.boursinos.hrplatform.model.absence.Absence;
 import java.util.List;

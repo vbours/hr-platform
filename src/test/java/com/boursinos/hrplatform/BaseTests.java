@@ -2,9 +2,7 @@ package com.boursinos.hrplatform;
 
 import com.boursinos.hrplatform.clients.ClientsPackage;
 import com.boursinos.hrplatform.model.ModelPackage;
-import com.boursinos.hrplatform.model.branch.Branch;
 import com.boursinos.hrplatform.repositories.RepositoryPackage;
-import com.boursinos.hrplatform.service.BranchService;
 import com.boursinos.hrplatform.service.ServicePackage;
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.HostConfig;
@@ -16,7 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +28,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 

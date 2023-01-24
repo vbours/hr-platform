@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.service;
+package com.boursinos.hrplatform.service.employee;
 
 import com.boursinos.hrplatform.model.branch.Branch;
 import com.boursinos.hrplatform.model.employee.Employee;

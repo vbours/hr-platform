@@ -2,7 +2,7 @@ package com.boursinos.hrplatform.branch;
 
 import com.boursinos.hrplatform.BaseTests;
 import com.boursinos.hrplatform.model.branch.Branch;
-import com.boursinos.hrplatform.service.BranchService;
+import com.boursinos.hrplatform.service.branch.BranchService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

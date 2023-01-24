@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.service;
+package com.boursinos.hrplatform.service.employee;
 
 import com.boursinos.hrplatform.model.branch.Branch;
 import com.boursinos.hrplatform.model.employee.Employee;
@@ -8,7 +8,6 @@ import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,10 @@
-package com.boursinos.hrplatform.service;
+package com.boursinos.hrplatform.service.absence;
 
 import com.boursinos.hrplatform.model.absence.Absence;
 import com.boursinos.hrplatform.model.employee.Employee;
 import com.boursinos.hrplatform.repositories.absence.AbsenceRepository;
 import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
+import com.boursinos.hrplatform.service.absence.AbsenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

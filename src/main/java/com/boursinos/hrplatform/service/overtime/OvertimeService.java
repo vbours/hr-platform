@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.service;
+package com.boursinos.hrplatform.service.overtime;
 
 import com.boursinos.hrplatform.model.overtime.Overtime;
 
