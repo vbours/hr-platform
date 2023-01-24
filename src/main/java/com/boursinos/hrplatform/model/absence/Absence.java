@@ -4,6 +4,7 @@ import com.boursinos.hrplatform.model.employee.Employee;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
@@ -16,6 +17,7 @@ import java.util.Date;
 @Table
 @JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 @Entity
+@NoArgsConstructor
 public class Absence {
 
     @Id
@@ -61,6 +63,13 @@ public class Absence {
     @LastModifiedDate
     private Date updatedAt;
 
+    public Absence(Date startAt, Date endAt, int requestedDays, AbsenceType absenceType, AbsenceStatus absenceStatus) {
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.requestedDays = requestedDays;
+        this.absenceType = absenceType;
+        this.absenceStatus = absenceStatus;
+    }
 
     public String getAbsenceId() {
         return absenceId;

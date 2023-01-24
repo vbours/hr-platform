@@ -96,8 +96,12 @@ public class BaseTests {
         CreateSql = "Create Table employee(employee_id text primary key, firstname text, lastname text, gender text, year_of_birth int, address text, post_code text, telNumber text, contract_type text, total_holidays int, remaining_holidays int, salary int, contract_start text, createdAt timestamp, updatedAt timestamp, branch_id text)";
         stmt.executeUpdate(CreateSql);
 
-        CreateSql = "Create Table connection_info(connectionId bigint, hostname text, port text, username text, password text, region text, database text, bucket text, table_name text, query text, schema text)";
+        CreateSql = "Create Table absence(absence_id text, employee_id text, start_at timestamp, end_at timestamp, requested_days int, absence_type text, absence_status text, createdAt timestamp, updatedAt text)";
         stmt.executeUpdate(CreateSql);
+
+        CreateSql = "Create Table overtime(overtime_id text primary key, employee_id text, overtime_day timestamp, overtime decimal, createdAt timestamp, updatedAt timestamp)";
+        stmt.executeUpdate(CreateSql);
+
     }
 
 

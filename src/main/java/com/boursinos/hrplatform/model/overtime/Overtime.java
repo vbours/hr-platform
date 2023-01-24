@@ -56,4 +56,9 @@ public class Overtime {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+
+    public Overtime(Date overtimeDay, Double overtime) {
+        this.overtimeDay = overtimeDay;
+        this.overtime = overtime;
+    }
 }
