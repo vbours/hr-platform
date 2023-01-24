@@ -55,7 +55,6 @@ public class ReportServiceImpl implements ReportService{
             throw new RuntimeException(e);
         }
         fileRepository.saveFile(new File(filename,null,bucket));
-        logger.info(branchMap.toString());
         return branchMap;
     }
 

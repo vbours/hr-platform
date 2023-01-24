@@ -27,7 +27,7 @@ public class File {
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "file_id")
-    private String employeeId;
+    private String fileId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "filename")

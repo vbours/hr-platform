@@ -20,7 +20,7 @@ public class FileCustomRepositoryImpl implements FileCustomRepository {
         file.setCreatedAt(new Date());
         file.setUpdatedAt(new Date());
         entityManager.persist(file);
-        return file.getEmployeeId();
+        return file.getFileId();
     }
 
 }

@@ -97,6 +97,9 @@ public class BaseTests {
         CreateSql = "Create Table overtime(overtime_id text primary key, employee_id text, overtime_day timestamp, overtime decimal, createdAt timestamp, updatedAt timestamp)";
         stmt.executeUpdate(CreateSql);
 
+        CreateSql = "Create Table file(file_id text primary key, filename text, type text, bucket text, createdAt timestamp, updatedAt timestamp)";
+        stmt.executeUpdate(CreateSql);
+
     }
 
 
