@@ -44,10 +44,10 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public Branch updateBranch(String id, Branch branch){
-        Branch oldBranch = branchRepository.getById(id);
+        Optional<Branch> oldBranch = this.getBranch(id);
         branch.setBranchId(id);
         branch.setUpdatedAt(new Date());
-        branch.setCreatedAt(oldBranch.getCreatedAt());
+        branch.setCreatedAt(oldBranch.get().getCreatedAt());
         branchRepository.save(branch);
         return branch;
     }

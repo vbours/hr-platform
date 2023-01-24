@@ -38,7 +38,7 @@ public class BranchTests extends BaseTests {
     public void getAllBranchesTest(){
         branchService.saveBranch(branch);
         List<Branch> getAllBranches = branchService.getAllBranches();
-        Assert.assertEquals(getAllBranches.size(),1);
+        Assert.assertEquals(getAllBranches.size(),2);
     }
 
     @Test
@@ -47,5 +47,20 @@ public class BranchTests extends BaseTests {
         Assert.assertEquals(getAllBranches.size(),1);
     }
 
-
+    @Test
+    public void saveAndUpdateBranchTest(){
+        String branchId = branchService.saveBranch(branch);
+        Assert.assertNotEquals(branchId,null);
+        Branch newBranch = new Branch("newAddress","newCity","newCountry");
+        Branch branch = branchService.updateBranch(branchId,newBranch);
+        Assert.assertEquals(branch.getAddress(),"newAddress");
+    }
+    @Test
+    public void saveAndDeleteBranchTest(){
+        String branchId = branchService.saveBranch(branch);
+        Assert.assertNotEquals(branchId,null);
+        branchService.deleteBranch(branchId);
+        Optional<Branch> branch = branchService.getBranch(branchId);
+        Assert.assertEquals(branch,Optional.empty());
+    }
 }
