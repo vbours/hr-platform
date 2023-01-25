@@ -53,10 +53,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee updateEmployee(String id, Employee employee){
-        Employee oldEmployee = employeeRepository.getById(id);
+        Optional<Employee> oldEmployee = this.getEmployee(id);
         employee.setEmployeeId(id);
         employee.setUpdatedAt(new Date());
-        employee.setCreatedAt(oldEmployee.getCreatedAt());
+        employee.setCreatedAt(oldEmployee.get().getCreatedAt());
         employeeRepository.save(employee);
         return employee;
     }

@@ -52,10 +52,10 @@ public class OvertimeServiceImpl implements OvertimeService {
 
     @Override
     public Overtime updateOvertime(String overtimeId, Overtime overtime){
-        Overtime oldOvertime = overtimeRepository.getById(overtimeId);
+        Optional<Overtime> oldOvertime = this.getOvertime(overtimeId);
         overtime.setOvertimeId(overtimeId);
         overtime.setUpdatedAt(new Date());
-        overtime.setCreatedAt(oldOvertime.getCreatedAt());
+        overtime.setCreatedAt(oldOvertime.get().getCreatedAt());
         overtimeRepository.save(overtime);
         return overtime;
     }

@@ -72,6 +72,27 @@ public class AbsenceTests extends BaseTests {
         List<Absence> getAllAbsences = absenceService.getAllAbsences(count);
         Assert.assertEquals(getAllAbsences.size(),1);
     }
+    @Test
+    public void saveAndUpdateAbsenceTest(){
+        String branchId = branchService.saveBranch(branch);
+        String employeeId = employeeService.saveEmployee(employee,branchId);
+        String absenceId = absenceService.saveAbsence(this.absence,employeeId);
 
+        Assert.assertNotEquals(absenceId,null);
+        Absence updatedAbsence = new Absence(new Date(),new Date(),4, AbsenceType.NORMAL, AbsenceStatus.REJECTED);
+        Absence absence = absenceService.updateAbsence(employeeId,absenceId,updatedAbsence);
+        Assert.assertEquals(absence.getRequestedDays(),4);
+    }
+    @Test
+    public void saveAndDeleteAbsenceTest(){
+        String branchId = branchService.saveBranch(branch);
+        String employeeId = employeeService.saveEmployee(employee,branchId);
+        String absenceId = absenceService.saveAbsence(this.absence,employeeId);
+
+        Assert.assertNotEquals(absenceId,null);
+        absenceService.deleteAbsence(absenceId);
+        Optional<Absence> absence = absenceService.getAbsence(absenceId);
+        Assert.assertEquals(absence,Optional.empty());
+    }
 
 }

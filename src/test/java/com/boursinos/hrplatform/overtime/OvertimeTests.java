@@ -1,6 +1,9 @@
 package com.boursinos.hrplatform.overtime;
 
 import com.boursinos.hrplatform.BaseTests;
+import com.boursinos.hrplatform.model.absence.Absence;
+import com.boursinos.hrplatform.model.absence.AbsenceStatus;
+import com.boursinos.hrplatform.model.absence.AbsenceType;
 import com.boursinos.hrplatform.model.branch.Branch;
 import com.boursinos.hrplatform.model.employee.ContractType;
 import com.boursinos.hrplatform.model.employee.Employee;
@@ -73,5 +76,27 @@ public class OvertimeTests extends BaseTests {
         Assert.assertTrue(getAllOvertimesPerEmployee.size() > 0);
     }
 
+    @Test
+    public void saveAndUpdateOvertimeTest(){
+        String branchId = branchService.saveBranch(branch);
+        String employeeId = employeeService.saveEmployee(employee,branchId);
+        String overtimeId = overtimeService.saveOvertime(this.overtime,employeeId);
+
+        Assert.assertNotEquals(overtimeId,null);
+        Overtime updatedOvertime = new Overtime(new Date(),3.5);
+        Overtime overtime = overtimeService.updateOvertime(overtimeId,updatedOvertime);
+        Assert.assertTrue(overtime.getOvertime().doubleValue() == 3.5);
+    }
+    @Test
+    public void saveAndDeleteAbsenceTest(){
+        String branchId = branchService.saveBranch(branch);
+        String employeeId = employeeService.saveEmployee(employee,branchId);
+        String overtimeId = overtimeService.saveOvertime(this.overtime,employeeId);
+
+        Assert.assertNotEquals(overtimeId,null);
+        overtimeService.deleteOvertime(overtimeId);
+        Optional<Overtime> overtime = overtimeService.getOvertime(overtimeId);
+        Assert.assertEquals(overtime,Optional.empty());
+    }
 
 }

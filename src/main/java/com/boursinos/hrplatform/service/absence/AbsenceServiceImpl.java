@@ -58,10 +58,10 @@ public class AbsenceServiceImpl implements AbsenceService {
 
     @Override
     public Absence updateAbsence(String employeeId, String absenceId, Absence absence){
-        Absence oldAbsence = absenceRepository.getById(absenceId);
+        Optional<Absence> oldAbsence = this.getAbsence(absenceId);
         absence.setAbsenceId(absenceId);
         absence.setUpdatedAt(new Date());
-        absence.setCreatedAt(oldAbsence.getCreatedAt());
+        absence.setCreatedAt(oldAbsence.get().getCreatedAt());
         absenceRepository.save(absence);
         return absence;
     }
