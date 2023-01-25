@@ -1,14 +1,12 @@
-package com.boursinos.hrplatform.report;
+package com.boursinos.hrplatform.service.report;
 
 import com.boursinos.hrplatform.BaseTests;
 import com.boursinos.hrplatform.model.branch.Branch;
 import com.boursinos.hrplatform.model.employee.ContractType;
 import com.boursinos.hrplatform.model.employee.Employee;
 import com.boursinos.hrplatform.model.employee.Gender;
-import com.boursinos.hrplatform.model.report.File;
 import com.boursinos.hrplatform.service.branch.BranchService;
 import com.boursinos.hrplatform.service.employee.EmployeeService;
-import com.boursinos.hrplatform.service.report.ReportService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class ReportTests extends BaseTests {
 
