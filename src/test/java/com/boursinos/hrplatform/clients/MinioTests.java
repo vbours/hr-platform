@@ -38,6 +38,21 @@ public class MinioTests extends BaseTests {
         Assert.assertEquals(objects.size(),0);
     }
 
+    @Test
+    public void getBucket() throws Exception {
+        minioClients.uploader(bucket,filename,localFolder);
+        List<String> buckets = minioClients.getAllBuckets();
+        Assert.assertTrue(buckets.contains(bucket));
+    }
+
+    @Test
+    public void deleteBucket() throws Exception {
+        minioClients.uploader(bucket,filename,localFolder);
+        minioClients.deleteBucket(bucket);
+        List<String> buckets = minioClients.getAllBuckets();
+        Assert.assertEquals(buckets.contains(bucket),false);
+    }
+
     @AfterAll
     public void deleteFiles() throws IOException {
         minioClients.deleteAllFiles(bucket);
