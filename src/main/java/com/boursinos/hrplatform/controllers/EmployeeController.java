@@ -1,8 +1,14 @@
 package com.boursinos.hrplatform.controllers;
 
+import com.boursinos.hrplatform.model.controller.employee.request.EmployeeRequest;
+import com.boursinos.hrplatform.model.controller.employee.response.EmployeeResponse;
+import com.boursinos.hrplatform.model.controller.employee.response.EmployeesResponse;
+import com.boursinos.hrplatform.model.controller.employee.response.SaveEmployeeResponse;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
 import com.boursinos.hrplatform.model.entity.employee.Employee;
 import com.boursinos.hrplatform.service.employee.EmployeeService;
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,11 +34,11 @@ public class EmployeeController {
      *
      * @return employess (List<Employee></>)
      */
-    @GetMapping(value = "/employee", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<List<Employee>> getAllEmployees() {
+    @GetMapping(value = "/employees", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<EmployeesResponse> getAllEmployees() {
         logger.info("Get all Employees request");
         List<Employee> employees = employeeService.getAllEmployees();
-        return new ResponseEntity<>(employees,HttpStatus.OK);
+        return new ResponseEntity<>(new EmployeesResponse(employees),HttpStatus.OK);
     }
 
     /**
@@ -41,43 +47,50 @@ public class EmployeeController {
      * @param employeeId the id of the employee
      * @return employee
      */
-    @GetMapping(value = "/employee/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Optional<Employee>> getEmployee(@RequestParam String employeeId) {
+    @GetMapping(value = "/employees/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<EmployeeResponse> getEmployee(@RequestParam String employeeId) {
         logger.info(String.format("Get Employee request - id : ",employeeId));
         Optional<Employee> employee = employeeService.getEmployee(employeeId);
-        return new ResponseEntity<>(employee,HttpStatus.OK);
+        ModelMapper modelMapper = new ModelMapper();
+        EmployeeResponse employeeResponse = modelMapper.map(employee.get(), EmployeeResponse.class);
+        return new ResponseEntity<>(employeeResponse,HttpStatus.OK);
     }
 
 
     /**
      * This endpoint saves employee data to the db.
      *
-     * @param employee request class for saving data
+     * @param employeeRequest request class for saving data
      * @param branchId the specific id of the branch where the employee is working
      * @return id (str)
      * @throws IOException in case of input/output exception
      */
     @PostMapping(value = "branch/{branch_id}/employee", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<String> saveEmployee(
-            @RequestBody Employee employee, @RequestParam String branchId) {
-        logger.info(String.format("Save for branch %s - Employee request : %s" , branchId, employee.toString()));
+    public @ResponseBody ResponseEntity<SaveEmployeeResponse> saveEmployee(
+            @RequestBody EmployeeRequest employeeRequest, @RequestParam String branchId) {
+        logger.info(String.format("Save for branch %s - Employee request : %s" , branchId, employeeRequest.toString()));
+        ModelMapper modelMapper = new ModelMapper();
+        Employee employee = modelMapper.map(employeeRequest, Employee.class);
         String id = employeeService.saveEmployee(employee, branchId);
-        return new ResponseEntity<>(id,HttpStatus.CREATED);
+        return new ResponseEntity<>(new SaveEmployeeResponse(id),HttpStatus.CREATED);
     }
 
     /**
      * This endpoint updates employee data to the db.
      *
-     * @param employee request class for saving data
+     * @param employeeRequest request class for saving data
      * @return id (str)
      * @throws IOException in case of input/output exception
      */
-    @PutMapping(value = "branch/{branch_id}/employee/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Employee> updateEmployee(
-            @RequestBody Employee employee, @RequestParam String branchId, @RequestParam String employeeId) {
-        logger.info(String.format("Update Employee request employee_id : %s, branch_id : %s, employee_data : %s" , employeeId, branchId, employee.toString()));
+    @PutMapping(value = "branches/{branch_id}/employees/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<EmployeeResponse> updateEmployee(
+            @RequestBody EmployeeRequest employeeRequest, @RequestParam String branchId, @RequestParam String employeeId) {
+        logger.info(String.format("Update Employee request employee_id : %s, branch_id : %s, employee_data : %s" , employeeId, branchId, employeeRequest.toString()));
+        ModelMapper modelMapper = new ModelMapper();
+        Employee employee = modelMapper.map(employeeRequest, Employee.class);
         Employee updatedEmployee = employeeService.updateEmployee(branchId,employee);
-        return new ResponseEntity<>(updatedEmployee,HttpStatus.CREATED);
+        EmployeeResponse employeeResponse = modelMapper.map(updatedEmployee,EmployeeResponse.class);
+        return new ResponseEntity<>(employeeResponse,HttpStatus.CREATED);
     }
 
     /**
@@ -85,7 +98,7 @@ public class EmployeeController {
      *
      * @param employeeId id of the employee in the db that we want to delete
      */
-    @DeleteMapping(value = "/employee/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/employees/{employee_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> deleteEmployee(
             @RequestParam String employeeId) throws Exception {
         logger.info(String.format("Delete Employee request id : %s" , employeeId));
