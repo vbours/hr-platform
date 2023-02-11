@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.model.absence;
+package com.boursinos.hrplatform.model.entity.absence;
 
 public enum AbsenceType {
     NORMAL("normal"),

@@ -1,7 +1,7 @@
 package com.boursinos.hrplatform.clients;
 
 import com.boursinos.hrplatform.BaseTests;
-import com.boursinos.hrplatform.model.storage.ObjectInfos;
+import com.boursinos.hrplatform.model.entity.storage.ObjectInfos;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;

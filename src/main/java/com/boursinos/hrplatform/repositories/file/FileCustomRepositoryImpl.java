@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.repositories.file;
 
-import com.boursinos.hrplatform.model.report.File;
+import com.boursinos.hrplatform.model.entity.report.File;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;

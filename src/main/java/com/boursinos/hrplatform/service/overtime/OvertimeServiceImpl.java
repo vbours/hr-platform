@@ -1,7 +1,7 @@
 package com.boursinos.hrplatform.service.overtime;
 
-import com.boursinos.hrplatform.model.employee.Employee;
-import com.boursinos.hrplatform.model.overtime.Overtime;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
+import com.boursinos.hrplatform.model.entity.overtime.Overtime;
 import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
 import com.boursinos.hrplatform.repositories.overtime.OvertimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

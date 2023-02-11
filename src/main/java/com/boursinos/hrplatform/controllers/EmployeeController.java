@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.controllers;
 
-import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
 import com.boursinos.hrplatform.service.employee.EmployeeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

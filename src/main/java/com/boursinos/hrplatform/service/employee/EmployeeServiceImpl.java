@@ -1,8 +1,8 @@
 package com.boursinos.hrplatform.service.employee;
 
-import com.boursinos.hrplatform.model.branch.Branch;
-import com.boursinos.hrplatform.model.employee.Employee;
-import com.boursinos.hrplatform.model.employee.Gender;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
+import com.boursinos.hrplatform.model.entity.employee.Gender;
 import com.boursinos.hrplatform.repositories.branch.BranchRepository;
 import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.graphql.mutation;
 
-import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
 import com.boursinos.hrplatform.service.employee.EmployeeService;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import org.springframework.beans.factory.annotation.Autowired;

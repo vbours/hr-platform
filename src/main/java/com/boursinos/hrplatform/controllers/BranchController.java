@@ -1,8 +1,13 @@
 package com.boursinos.hrplatform.controllers;
 
-import com.boursinos.hrplatform.model.branch.Branch;
+import com.boursinos.hrplatform.model.controller.branch.request.BranchRequest;
+import com.boursinos.hrplatform.model.controller.branch.response.BranchResponse;
+import com.boursinos.hrplatform.model.controller.branch.response.BranchesResponse;
+import com.boursinos.hrplatform.model.controller.branch.response.SaveBranchResponse;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
 import com.boursinos.hrplatform.service.branch.BranchService;
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,57 +31,65 @@ public class BranchController {
     /**
      * This endpoint return all the branches from the db.
      *
-     * @return employess (List<Employee>)
+     * @return employess (List<Branch>)
      */
-    @GetMapping(value = "/branch", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<List<Branch>> getAllBranches() {
+    @GetMapping(value = "/branches", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<BranchesResponse> getAllBranches() {
         logger.info("Get all Branches request");
         List<Branch> branches = branchService.getAllBranches();
-        return new ResponseEntity<>(branches,HttpStatus.OK);
+        BranchesResponse branchesResponse = new BranchesResponse(branches);
+        return new ResponseEntity<>(branchesResponse,HttpStatus.OK);
     }
 
     /**
      * This endpoint return a specific branch given an id.
      *
      * @param branchId the id of the employee
-     * @return employee
+     * @return branchResponse
      */
     @GetMapping(value = "/branch/{branch_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Optional<Branch>> getBranch(@RequestParam String branchId) {
+    public @ResponseBody ResponseEntity<BranchResponse> getBranch(@RequestParam String branchId) {
         logger.info(String.format("Get Branch request - id : %s ",branchId));
         Optional<Branch> branch = branchService.getBranch(branchId);
-        return new ResponseEntity<>(branch,HttpStatus.OK);
+        ModelMapper modelMapper = new ModelMapper();
+        BranchResponse branchResponse = modelMapper.map(branch.get(), BranchResponse.class);
+        return new ResponseEntity<>(branchResponse,HttpStatus.OK);
     }
 
 
     /**
      * This endpoint saves employee data to the db.
      *
-     * @param branch request class for saving data
+     * @param branchRequest request class for saving data
      * @return id (str)
      */
     @PostMapping(value = "/branch", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<String> saveBranch(
-            @RequestBody Branch branch) {
-        logger.info(String.format("Save Branch request : %s" , branch.toString()));
+    public @ResponseBody ResponseEntity<SaveBranchResponse> saveBranch(
+            @RequestBody BranchRequest branchRequest) {
+        logger.info(String.format("Save Branch request : %s" , branchRequest.toString()));
+        ModelMapper modelMapper = new ModelMapper();
+        Branch branch = modelMapper.map(branchRequest, Branch.class);
         String id = branchService.saveBranch(branch);
-        return new ResponseEntity<>(id,HttpStatus.CREATED);
+        return new ResponseEntity<>(new SaveBranchResponse(id),HttpStatus.CREATED);
     }
 
     /**
      * This endpoint updates branch data to the db.
      *
-     * @param branch request class for saving data
+     * @param branchRequest request class for saving data
      * @param branchId the id of the branch to update
      * @return id (str)
      * @throws IOException in case of input/output exception
      */
     @PutMapping(value = "/branch/{branch_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Branch> updateBranch(
-            @RequestBody Branch branch, @RequestParam String branchId) {
-        logger.info(String.format("Update Branch id : %s -  request : %s" , branchId, branch.toString()));
+    public @ResponseBody ResponseEntity<BranchResponse> updateBranch(
+            @RequestBody BranchRequest branchRequest, @RequestParam String branchId) {
+        logger.info(String.format("Update Branch id : %s -  request : %s" , branchId, branchRequest.toString()));
+        ModelMapper modelMapper = new ModelMapper();
+        Branch branch = modelMapper.map(branchRequest, Branch.class);
         Branch updatedBranch = branchService.updateBranch(branchId,branch);
-        return new ResponseEntity<>(updatedBranch,HttpStatus.CREATED);
+        BranchResponse branchResponse = modelMapper.map(updatedBranch,BranchResponse.class);
+        return new ResponseEntity<>(branchResponse,HttpStatus.CREATED);
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.model.branch;
+package com.boursinos.hrplatform.model.controller.branch.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,44 +20,24 @@ import java.util.Date;
 @JsonFormat
 @NoArgsConstructor
 @ToString
-@Entity
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
-@Table(name = "Branch")
-public class Branch {
+public class BranchResponse {
 
-    @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @JsonIgnore
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "branch_id")
     private String branchId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "address")
     private String address;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "city")
     private String city;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "country")
     private String country;
 
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date createdAt;
 
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date updatedAt;
 
-    public Branch(String address, String city, String country) {
-        this.address = address;
-        this.city = city;
-        this.country = country;
-    }
 }

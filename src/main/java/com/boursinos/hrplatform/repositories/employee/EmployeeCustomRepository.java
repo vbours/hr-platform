@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.repositories.employee;
 
-import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
 
 import java.util.List;
 

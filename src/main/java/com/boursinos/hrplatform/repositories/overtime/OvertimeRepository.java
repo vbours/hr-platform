@@ -1,7 +1,7 @@
 package com.boursinos.hrplatform.repositories.overtime;
 
-import com.boursinos.hrplatform.model.employee.Employee;
-import com.boursinos.hrplatform.model.overtime.Overtime;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
+import com.boursinos.hrplatform.model.entity.overtime.Overtime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

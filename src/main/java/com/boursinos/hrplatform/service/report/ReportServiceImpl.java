@@ -1,8 +1,8 @@
 package com.boursinos.hrplatform.service.report;
 
 import com.boursinos.hrplatform.clients.MinioClients;
-import com.boursinos.hrplatform.model.employee.Employee;
-import com.boursinos.hrplatform.model.report.File;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
+import com.boursinos.hrplatform.model.entity.report.File;
 import com.boursinos.hrplatform.repositories.employee.EmployeeRepository;
 import com.boursinos.hrplatform.repositories.file.FileRepository;
 import com.boursinos.hrplatform.utils.FileUtils;

@@ -1,7 +1,6 @@
 package com.boursinos.hrplatform.service.employee;
 
-import com.boursinos.hrplatform.model.branch.Branch;
-import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
 
 import java.util.List;
 import java.util.Optional;

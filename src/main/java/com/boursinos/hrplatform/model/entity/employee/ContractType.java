@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.model.employee;
+package com.boursinos.hrplatform.model.entity.employee;
 
 public enum ContractType {
     FULL_TIME("fullTime"),

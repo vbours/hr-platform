@@ -1,6 +1,6 @@
-package com.boursinos.hrplatform.model.employee;
+package com.boursinos.hrplatform.model.entity.employee;
 
-import com.boursinos.hrplatform.model.branch.Branch;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

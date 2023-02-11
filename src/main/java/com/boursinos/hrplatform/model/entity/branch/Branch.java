@@ -1,6 +1,6 @@
-package com.boursinos.hrplatform.model.overtime;
+package com.boursinos.hrplatform.model.entity.branch;
 
-import com.boursinos.hrplatform.model.employee.Employee;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -19,33 +17,33 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
+@JsonFormat
 @NoArgsConstructor
-@Table
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
+@ToString
 @Entity
-public class Overtime {
+@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
+@Table(name = "Branch")
+public class Branch {
 
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "overtime_id")
-    private String overtimeId;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    @ToString.Exclude
-    private Employee employee;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "branch_id")
+    private String branchId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "overtime_day")
-    private Date overtimeDay;
+    @Column(name = "address")
+    private String address;
 
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @Column(name = "overtime")
-    private Double overtime;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "city")
+    private String city;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "country")
+    private String country;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -57,8 +55,9 @@ public class Overtime {
     @LastModifiedDate
     private Date updatedAt;
 
-    public Overtime(Date overtimeDay, Double overtime) {
-        this.overtimeDay = overtimeDay;
-        this.overtime = overtime;
+    public Branch(String address, String city, String country) {
+        this.address = address;
+        this.city = city;
+        this.country = country;
     }
 }

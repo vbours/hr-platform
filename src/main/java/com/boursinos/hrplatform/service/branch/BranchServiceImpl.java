@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.service.branch;
 
-import com.boursinos.hrplatform.model.branch.Branch;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
 import com.boursinos.hrplatform.repositories.branch.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

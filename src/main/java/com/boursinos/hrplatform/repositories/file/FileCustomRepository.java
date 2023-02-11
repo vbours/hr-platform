@@ -1,9 +1,6 @@
 package com.boursinos.hrplatform.repositories.file;
 
-import com.boursinos.hrplatform.model.employee.Employee;
-import com.boursinos.hrplatform.model.report.File;
-
-import java.util.List;
+import com.boursinos.hrplatform.model.entity.report.File;
 
 public interface FileCustomRepository {
 

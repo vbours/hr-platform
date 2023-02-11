@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.graphql.query;
 
-import com.boursinos.hrplatform.model.branch.Branch;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
 import com.boursinos.hrplatform.service.branch.BranchService;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.model.storage;
+package com.boursinos.hrplatform.model.entity.storage;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

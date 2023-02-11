@@ -1,7 +1,7 @@
 package com.boursinos.hrplatform.repositories.employee;
 
-import com.boursinos.hrplatform.model.branch.Branch;
-import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
 import com.boursinos.hrplatform.repositories.branch.BranchRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

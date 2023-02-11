@@ -1,4 +1,4 @@
-package com.boursinos.hrplatform.model.report;
+package com.boursinos.hrplatform.model.entity.report;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

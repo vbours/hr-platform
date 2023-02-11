@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.clients;
 
-import com.boursinos.hrplatform.model.storage.ObjectInfos;
+import com.boursinos.hrplatform.model.entity.storage.ObjectInfos;
 import io.minio.messages.Bucket;
 
 import java.io.IOException;

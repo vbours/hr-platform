@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.service.overtime;
 
-import com.boursinos.hrplatform.model.overtime.Overtime;
+import com.boursinos.hrplatform.model.entity.overtime.Overtime;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,13 +1,13 @@
 package com.boursinos.hrplatform.service.absence;
 
 import com.boursinos.hrplatform.BaseTests;
-import com.boursinos.hrplatform.model.absence.Absence;
-import com.boursinos.hrplatform.model.absence.AbsenceStatus;
-import com.boursinos.hrplatform.model.absence.AbsenceType;
-import com.boursinos.hrplatform.model.branch.Branch;
-import com.boursinos.hrplatform.model.employee.ContractType;
-import com.boursinos.hrplatform.model.employee.Employee;
-import com.boursinos.hrplatform.model.employee.Gender;
+import com.boursinos.hrplatform.model.entity.absence.Absence;
+import com.boursinos.hrplatform.model.entity.absence.AbsenceStatus;
+import com.boursinos.hrplatform.model.entity.absence.AbsenceType;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
+import com.boursinos.hrplatform.model.entity.employee.ContractType;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
+import com.boursinos.hrplatform.model.entity.employee.Gender;
 import com.boursinos.hrplatform.service.branch.BranchService;
 import com.boursinos.hrplatform.service.employee.EmployeeService;
 import org.junit.Assert;

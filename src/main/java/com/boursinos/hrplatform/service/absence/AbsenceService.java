@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.service.absence;
 
-import com.boursinos.hrplatform.model.absence.Absence;
+import com.boursinos.hrplatform.model.entity.absence.Absence;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.repositories.branch;
 
-import com.boursinos.hrplatform.model.branch.Branch;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;

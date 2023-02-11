@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.service.report;
 
-import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
 
 import java.util.List;
 import java.util.Map;

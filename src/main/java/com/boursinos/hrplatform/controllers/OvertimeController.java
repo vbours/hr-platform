@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.controllers;
 
-import com.boursinos.hrplatform.model.overtime.Overtime;
+import com.boursinos.hrplatform.model.entity.overtime.Overtime;
 import com.boursinos.hrplatform.service.overtime.OvertimeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

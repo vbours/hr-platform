@@ -1,6 +1,6 @@
 package com.boursinos.hrplatform.utils;
 
-import com.boursinos.hrplatform.model.employee.Employee;
+import com.boursinos.hrplatform.model.entity.employee.Employee;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
