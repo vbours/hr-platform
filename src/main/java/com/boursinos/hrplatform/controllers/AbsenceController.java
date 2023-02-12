@@ -1,8 +1,14 @@
 package com.boursinos.hrplatform.controllers;
 
+import com.boursinos.hrplatform.model.controller.absence.request.AbsenceRequest;
+import com.boursinos.hrplatform.model.controller.absence.response.AbsenceResponse;
+import com.boursinos.hrplatform.model.controller.absence.response.AbsencesResponse;
+import com.boursinos.hrplatform.model.controller.absence.response.SaveAbsenceResponse;
 import com.boursinos.hrplatform.model.entity.absence.Absence;
+import com.boursinos.hrplatform.model.entity.branch.Branch;
 import com.boursinos.hrplatform.service.absence.AbsenceService;
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,11 +33,11 @@ public class AbsenceController {
      *
      * @return absences (List<Absences>)
      */
-    @GetMapping(value = "/absence", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<List<Absence>> getAllAbsences() {
+    @GetMapping(value = "/absences", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<AbsencesResponse> getAllAbsences() {
         logger.info("Get all absences request");
         List<Absence> absences = absenceService.getAllAbsences();
-        return new ResponseEntity<>(absences,HttpStatus.OK);
+        return new ResponseEntity<>(new AbsencesResponse(absences),HttpStatus.OK);
     }
 
     /**
@@ -40,10 +46,10 @@ public class AbsenceController {
      * @return absences (List<Absences>)
      */
     @GetMapping(value = "/employee/{employee_id}/absence", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<List<Absence>> getAllAbsencesByEmployee(@RequestParam String employeeId) {
+    public @ResponseBody ResponseEntity<AbsencesResponse> getAllAbsencesByEmployee(@RequestParam String employeeId) {
         logger.info(String.format("Get all absences request for employee : %s" , employeeId));
         List<Absence> absences = absenceService.getAllAbsencesByEmployee(employeeId);
-        return new ResponseEntity<>(absences,HttpStatus.OK);
+        return new ResponseEntity<>(new AbsencesResponse(absences),HttpStatus.OK);
     }
 
     /**
@@ -53,43 +59,50 @@ public class AbsenceController {
      * @return absence
      */
     @GetMapping(value = "/absence/{absence_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Optional<Absence>> getAbsence(@RequestParam String absenceId) {
+    public @ResponseBody ResponseEntity<AbsenceResponse> getAbsence(@RequestParam String absenceId) {
         logger.info(String.format("Get absence request - id : %s ", absenceId));
         Optional<Absence> absence = absenceService.getAbsence(absenceId);
-        return new ResponseEntity<>(absence,HttpStatus.OK);
+        ModelMapper modelMapper = new ModelMapper();
+        AbsenceResponse absenceResponse = modelMapper.map(absence.get(), AbsenceResponse.class);
+        return new ResponseEntity<>(absenceResponse,HttpStatus.OK);
     }
 
 
     /**
      * This endpoint saves absence data to the db.
      *
-     * @param absence request class for saving data
+     * @param absenceRequest request class for saving data
      * @param employeeId the id of the employee
-     * @return id (str)
+     * @return SaveAbsenceResponse
      */
     @PostMapping(value = "/employee/{employee_id}/absence", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<String> saveAbsence(
-            @RequestBody Absence absence, @RequestParam String employeeId) {
-        logger.info(String.format("Save Absence request : %s, for employee: %s " , absence.toString(), employeeId));
+    public @ResponseBody ResponseEntity<SaveAbsenceResponse> saveAbsence(
+            @RequestBody AbsenceRequest absenceRequest, @RequestParam String employeeId) {
+        logger.info(String.format("Save Absence request : %s, for employee: %s " , absenceRequest.toString(), employeeId));
+        ModelMapper modelMapper = new ModelMapper();
+        Absence absence = modelMapper.map(absenceRequest,Absence.class);
         String id = absenceService.saveAbsence(absence, employeeId);
-        return new ResponseEntity<>(id,HttpStatus.CREATED);
+        return new ResponseEntity<>(new SaveAbsenceResponse(id),HttpStatus.CREATED);
     }
 
     /**
      * This endpoint updates absence data to the db.
      *
-     * @param absence request class for saving data
+     * @param absenceRequest request class for saving data
      * @param absenceId the specific id for the absence
      * @param employeeId the id of the employee
      * @id the id of the absence
      * @return absence (Absence)
      */
     @PutMapping(value = "/employee/{employee_id}/absence/{absence_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<Absence> updateAbsence(
-            @RequestBody Absence absence, @RequestParam String employeeId, @RequestParam String absenceId) {
-        logger.info(String.format("Update absence request : %s, for absence_id : %s, for employee : %s" , absence.toString(), absenceId, employeeId));
+    public @ResponseBody ResponseEntity<AbsenceResponse> updateAbsence(
+            @RequestBody AbsenceRequest absenceRequest, @RequestParam String employeeId, @RequestParam String absenceId) {
+        logger.info(String.format("Update absence request : %s, for absence_id : %s, for employee : %s" , absenceRequest.toString(), absenceId, employeeId));
+        ModelMapper modelMapper = new ModelMapper();
+        Absence absence = modelMapper.map(absenceRequest,Absence.class);
         Absence updatedAbsence = absenceService.updateAbsence(employeeId, absenceId, absence);
-        return new ResponseEntity<>(updatedAbsence,HttpStatus.CREATED);
+        AbsenceResponse absenceResponse = modelMapper.map(updatedAbsence, AbsenceResponse.class);
+        return new ResponseEntity<>(absenceResponse,HttpStatus.CREATED);
     }
 
     /**
