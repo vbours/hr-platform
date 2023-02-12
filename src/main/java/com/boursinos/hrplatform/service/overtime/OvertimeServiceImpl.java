@@ -56,6 +56,7 @@ public class OvertimeServiceImpl implements OvertimeService {
         overtime.setOvertimeId(overtimeId);
         overtime.setUpdatedAt(new Date());
         overtime.setCreatedAt(oldOvertime.get().getCreatedAt());
+        overtime.setEmployee(oldOvertime.get().getEmployee());
         overtimeRepository.save(overtime);
         return overtime;
     }
